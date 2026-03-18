@@ -3,375 +3,636 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuxeSmile Dental Clinic | Advanced Care for a Perfect Smile</title>
-  <!-- Tailwind + Fonts + Font Awesome -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- AOS (Animate on Scroll) -->
+  <meta name="description" content="Premium dental clinic offering implants, whitening and smile design">
+  <title>SmileCare · Dental clinic</title>
+  <!-- AOS (Animate on Scroll) library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <!-- Lottie for hero -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* custom glass + gold touches */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 128, 128, 0.1);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
     }
-    .gold-border {
-      border-color: #D4AF37;
+
+    body {
+      background-color: #f9fdff;
+      color: #1e2f4e;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
-    .hover-gold:hover {
-      box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.3);
+
+    /* custom scroll bar */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-    .bg-teal-50 {
-      background-color: #f0f9fa;
+    ::-webkit-scrollbar-track {
+      background: #d9ecf5;
     }
-    /* lightbox modal */
-    #lightbox-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
+    ::-webkit-scrollbar-thumb {
+      background: #2aa9c9;
+      border-radius: 10px;
     }
-    #lightbox-modal.active {
+
+    /* navbar */
+    .navbar {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 170, 200, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    #lightbox-img {
-      max-width: 90%;
-      max-height: 90%;
-      border: 4px solid #D4AF37;
-      border-radius: 8px;
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0e7b9e;
     }
-    .close-lightbox {
-      position: absolute;
-      top: 20px; right: 30px;
-      color: white;
-      font-size: 40px;
+    .logo span {
+      color: #1e2f4e;
+      font-weight: 300;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #1e2f4e;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 1.1rem;
+    }
+    .nav-links a:hover {
+      color: #2aa9c9;
+      border-bottom: 2px solid #2aa9c9;
+    }
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      color: #0e7b9e;
       cursor: pointer;
     }
-    /* floating whatsapp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: #25d366;
-      color: white;
-      width: 60px; height: 60px;
-      border-radius: 50%;
+
+    /* mobile menu */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .menu-icon {
+        display: block;
+      }
+    }
+
+    /* hero */
+    .hero {
+      min-height: 90vh;
+      background: linear-gradient(95deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 70%), url('images/hero.jpg') center/cover no-repeat;
       display: flex;
       align-items: center;
+      justify-content: flex-start;
+      padding: 0 7%;
+      color: white;
+      position: relative;
+    }
+    .hero-content {
+      max-width: 700px;
+      background: rgba(42, 169, 201, 0.15);
+      backdrop-filter: blur(3px);
+      padding: 2.5rem 3rem;
+      border-radius: 32px;
+      border-left: 8px solid #fff3c9;
+    }
+    .hero-content h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 2px 2px 10px #001122;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+    .hero-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background: #f7d44c;
+      color: #1e2f4e;
+      font-weight: 600;
+      padding: 0.9rem 2.3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .hero-btn:hover {
+      background: #ffe173;
+      transform: scale(1.05);
+      border-color: white;
+    }
+
+    /* sections general */
+    section {
+      padding: 5rem 7%;
+    }
+    .section-title {
+      font-size: 2.7rem;
+      font-weight: 600;
+      color: #0e7b9e;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: #f7d44c;
+      border-radius: 4px;
+    }
+
+    /* services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .service-card {
+      background: white;
+      border-radius: 36px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px rgba(42, 169, 201, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,170,200,0.1);
+      text-align: center;
+    }
+    .service-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 25px 40px rgba(0,150,180,0.25);
+    }
+    .service-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 28px;
+      margin-bottom: 1.3rem;
+      border: 4px solid #f0fcff;
+    }
+    .service-icon {
+      font-size: 3.5rem;
+      color: #2aa9c9;
+      margin: 1rem 0;
+    }
+    .service-card h3 {
+      font-size: 1.8rem;
+      color: #1e2f4e;
+      margin: 0.5rem 0;
+    }
+    .service-card p {
+      color: #3c4e6c;
+      line-height: 1.5;
+    }
+
+    /* stats / short sayings */
+    .stats-container {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      font-size: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 100;
-      transition: transform 0.2s;
+      gap: 1.8rem;
+      margin: 4rem 0;
     }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      background: #20ba5c;
+    .stat-item {
+      background: #def4fc;
+      padding: 1.2rem 2.2rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #0b566e;
+      box-shadow: 0 6px 0 #b0d9e9;
+      transition: 0.2s;
+      border: 1px solid #c2e5f2;
     }
-    /* smooth scroll */
-    html {
-      scroll-behavior: smooth;
+    .stat-item i {
+      margin-right: 10px;
+      color: #f7b731;
+    }
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 0 #9ac7db;
+    }
+
+    /* dentist cards */
+    .dentist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .dentist-card {
+      background: white;
+      border-radius: 42px;
+      padding: 2rem 1.5rem 2rem;
+      text-align: center;
+      transition: 0.3s;
+      border: 2px solid rgba(42,169,201,0.2);
+    }
+    .dentist-card:hover {
+      border-color: #f7d44c;
+      transform: scale(1.02);
+    }
+    .dentist-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #c2edff;
+      margin-bottom: 1.3rem;
+    }
+    .dentist-card h4 {
+      font-size: 2rem;
+      color: #0e7b9e;
+    }
+    .dentist-card p {
+      font-size: 1.2rem;
+      color: #2e4a6b;
+      background: #e6f5fb;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      display: inline-block;
+    }
+
+    /* testimonials (long) */
+    .testimonials {
+      background: #e5f4fb;
+      border-radius: 80px 0 80px 0;
+      margin: 2rem 7%;
+      padding: 3.5rem;
+    }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .testi-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 40px;
+      font-style: italic;
+      box-shadow: 10px 10px 0 #b7ddea;
+    }
+    .testi-card i {
+      color: #f7d44c;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .testi-card p {
+      font-size: 1.3rem;
+      color: #1e2f4e;
+    }
+    .testi-card .author {
+      margin-top: 1.5rem;
+      font-weight: 600;
+      color: #0e7b9e;
+      font-style: normal;
+    }
+
+    /* before after section */
+    .ba-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+    .ba-card {
+      flex: 1 1 300px;
+      background: #fff;
+      border-radius: 48px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 30px rgba(0,110,140,0.1);
+    }
+    .ba-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 32px;
+      border: 5px solid #e1f2f9;
+    }
+    .ba-label {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 1rem 0 0.2rem;
+      color: #0e7b9e;
+    }
+    .ba-sub {
+      color: #5f7d9e;
+    }
+
+    /* appointment cta */
+    .appointment-cta {
+      background: linear-gradient(130deg, #0a5d7c, #2aa9c9);
+      color: white;
+      border-radius: 70px 0 70px 0;
+      padding: 4rem 7%;
+      text-align: center;
+    }
+    .appointment-cta h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .appointment-cta p {
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+    .cta-btn {
+      background: #f7d44c;
+      border: none;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e2f4e;
+      padding: 1.2rem 3.5rem;
+      border-radius: 60px;
+      margin-top: 2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px #063142;
+    }
+    .cta-btn:hover {
+      background: #ffea8b;
+      transform: scale(1.05);
+    }
+
+    /* footer */
+    footer {
+      background: #0e3e52;
+      color: #bbdfed;
+      padding: 3rem 7%;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .footer-domain {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      letter-spacing: 2px;
+    }
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+    .social-icons a {
+      color: white;
+      background: #2a7f9c;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+    .social-icons a:hover {
+      background: #f7d44c;
+      color: #0e3e52;
     }
   </style>
 </head>
-<body class="font-poppins text-gray-800 bg-white">
+<body>
+  <!-- simple navbar -->
+  <nav class="navbar">
+    <div class="logo">Smile<span>Care</span></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#dentist">Dentist</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#appointment">Appointment</a>
+    </div>
+    <div class="menu-icon"><i class="fas fa-bars"></i></div>
+  </nav>
 
-<!-- REMOVE AFTER PAYMENT -->
-<!-- ========== watermark comment ========== -->
-<!-- Made by @freelance.website (REMOVE AFTER PAYMENT) -->
+  <!-- HERO SECTION (healthy teeth is wealth) -->
+  <section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-right" data-aos-duration="1200">
+      <h1>Healthy teeth<br>is Wealth</h1>
+      <p>Premium dental care · painless & gentle</p>
+      <a href="#appointment" class="hero-btn"><i class="fas fa-calendar-check"></i>  Book now</a>
+    </div>
+  </section>
 
-<!-- floating WhatsApp -->
-<a href="https://wa.me/919876543210?text=Hello%20LuxeSmile%2C%20I%27d%20like%20to%20book%20an%20appointment." class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Lightbox Modal -->
-<div id="lightbox-modal" onclick="closeLightbox()">
-  <span class="close-lightbar" onclick="closeLightbox()">&times;</span>
-  <img id="lightbox-img" src="" alt="">
-</div>
-
-<!-- Hero Section -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-800 to-teal-600 text-white">
-  <!-- background image with overlay -->
-  <div class="absolute inset-0 z-0">
-    <img src="images/hero.jpg" class="w-full h-full object-cover opacity-30" alt="Luxury dental clinic">
-    <div class="absolute inset-0 bg-teal-900/40"></div>
-  </div>
-  <!-- hero content -->
-  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-      <div class="text-left md:w-1/2">
-        <h1 class="text-5xl md:text-7xl font-bold font-playfair mb-4 leading-tight" style="font-family: 'Playfair Display', serif;">
-          <span class="text-white">LuxeSmile</span><br>
-          <span class="text-amber-200">Dental Clinic</span>
-        </h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-100">Advanced Care for a Perfect Smile</p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#appointment" class="bg-amber-300 text-teal-900 px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition shadow-lg hover:shadow-amber-300/50">Book Appointment</a>
-          <a href="#services" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-800 transition">View Services</a>
-        </div>
+  <!-- SERVICES SECTION (we offer best services + 4 cards) -->
+  <section id="services">
+    <h2 class="section-title" data-aos="fade-up">We offer best Services</h2>
+    <div class="services-grid">
+      <!-- Dental implants (service1.jpg) -->
+      <div class="service-card" data-aos="zoom-in-up" data-aos-delay="100">
+        <img src="images/service1.jpg" alt="dental implant" class="service-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <i class="fas fa-tooth service-icon" style="display: none;"></i>
+        <h3>Dental implants</h3>
+        <p>Our services include dental implants, which are used to replace missing teeth and restore your smile.</p>
       </div>
-      <!-- Lottie 3D animation container (subtle) -->
-      <div class="md:w-1/3 w-64 h-64 mx-auto md:mx-0 glass-card rounded-2xl p-4">
-        <div id="lottie-hero" class="w-full h-full"></div>
+      <!-- High Quality Equipment (service2.jpg) -->
+      <div class="service-card" data-aos="zoom-in-up" data-aos-delay="200">
+        <img src="images/service2.jpg" alt="high tech equipment" class="service-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <i class="fas fa-microscope service-icon" style="display: none;"></i>
+        <h3>High Quality Equipment</h3>
+        <p>We use the latest equipment to ensure you receive the highest quality care.</p>
+      </div>
+      <!-- Clear Orthodontics (service3.jpg) -->
+      <div class="service-card" data-aos="zoom-in-up" data-aos-delay="300">
+        <img src="images/service3.jpg" alt="clear orthodontics" class="service-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <i class="fas fa-teeth service-icon" style="display: none;"></i>
+        <h3>Clear Orthodontics</h3>
+        <p>We provide clear orthodontic treatment to straighten your teeth and improve your bite.</p>
+      </div>
+      <!-- Teeth Whitening (no dedicated image, using icon) -->
+      <div class="service-card" data-aos="zoom-in-up" data-aos-delay="400">
+        <i class="fas fa-sun service-icon" style="font-size: 4rem; color: #f7b731;"></i>
+        <h3>Teeth Whitening</h3>
+        <p>We offer professional teeth whitening treatments to brighten your smile.</p>
+      </div>
+    </div>
+
+    <!-- short "what people say" (statements) -->
+    <div class="stats-container" data-aos="fade-up">
+      <div class="stat-item"><i class="fas fa-truck-medical"></i> We will help in Emergency</div>
+      <div class="stat-item"><i class="fas fa-star"></i> We have a great experience</div>
+      <div class="stat-item"><i class="fas fa-user-md"></i> The staff is very friendly</div>
+      <div class="stat-item"><i class="fas fa-award"></i> The service is excellent</div>
+    </div>
+  </section>
+
+  <!-- OUR EXPERT DENTIST (updated with three unique doctors) -->
+  <section id="dentist">
+    <h2 class="section-title" data-aos="fade-right">Our Expert Dentist</h2>
+    <div class="dentist-grid">
+      <!-- Doctor 1: Dr. Ahmed Ali (Cosmetic Dentistry) -->
+      <div class="dentist-card" data-aos="flip-left" data-aos-delay="100">
+        <img src="images/doctor.jpg" alt="Dr. Ahmed Ali" class="dentist-img" onerror="this.src='https://via.placeholder.com/200x200?text=Doctor'">
+        <h4>Dr. Ahmed Ali</h4>
+        <p>Cosmetic Dentistry</p>
+      </div>
+      <!-- Doctor 2: Dr. Sarah Khan (Orthodontics Specialist) -->
+      <div class="dentist-card" data-aos="flip-left" data-aos-delay="200">
+        <img src="images/doctor2.jpg" alt="Dr. Sarah Khan" class="dentist-img" onerror="this.src='https://via.placeholder.com/200x200?text=Doctor'">
+        <h4>Dr. Sarah Khan</h4>
+        <p>Orthodontics Specialist</p>
+      </div>
+      <!-- Doctor 3: Dr. Arjun Mehta (Implant Dentistry Expert) -->
+      <div class="dentist-card" data-aos="flip-left" data-aos-delay="300">
+        <img src="images/doctor3.jpg" alt="Dr. Arjun Mehta" class="dentist-img" onerror="this.src='https://via.placeholder.com/200x200?text=Doctor'">
+        <h4>Dr. Arjun Mehta</h4>
+        <p>Implant Dentistry Expert</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LONG TESTIMONIALS (what people say about dr) -->
+  <div id="testimonials" class="testimonials" data-aos="fade-up">
+    <h2 class="section-title" style="color: #0b4b63;">What people say</h2>
+    <div class="testi-grid">
+      <div class="testi-card" data-aos="fade-right">
+        <i class="fas fa-quote-right"></i>
+        <p>"Dr. Ahmed Ali is the best dentist I've ever seen!"</p>
+        <div class="author">— Rajesh K.</div>
+      </div>
+      <div class="testi-card" data-aos="fade-up">
+        <i class="fas fa-quote-right"></i>
+        <p>"I am so happy with my smile after my treatment!"</p>
+        <div class="author">— Priya M.</div>
+      </div>
+      <div class="testi-card" data-aos="fade-left">
+        <i class="fas fa-quote-right"></i>
+        <p>"Dr. Ahmed Ali is amazing! He made me feel comfortable throughout the entire process."</p>
+        <div class="author">— Anjali S.</div>
       </div>
     </div>
   </div>
-  <!-- bottom fade -->
-  <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent"></div>
-</section>
 
-<!-- About Section -->
-<section class="py-20 px-4 max-w-7xl mx-auto">
-  <div class="grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <h2 class="text-4xl font-playfair font-bold text-teal-800 mb-6">Where luxury meets <span class="text-amber-500">precision</span></h2>
-      <p class="text-gray-600 mb-8 leading-relaxed">At LuxeSmile, we combine cutting‑edge technology with a soothing, spa‑like environment. Our expert team ensures your comfort while delivering top‑tier dental care.</p>
-      <!-- trust points -->
-      <div class="grid grid-cols-3 gap-3 text-center">
-        <div class="p-4 bg-teal-50 rounded-xl">
-          <i class="fas fa-tooth text-3xl text-amber-500 mb-2"></i>
-          <p class="font-semibold text-teal-800">15+ years</p>
-          <p class="text-xs text-gray-500">experience</p>
-        </div>
-        <div class="p-4 bg-teal-50 rounded-xl">
-          <i class="fas fa-microscope text-3xl text-amber-500 mb-2"></i>
-          <p class="font-semibold text-teal-800">Digital workflow</p>
-          <p class="text-xs text-gray-500">3D / AI</p>
-        </div>
-        <div class="p-4 bg-teal-50 rounded-xl">
-          <i class="fas fa-hand-sparkles text-3xl text-amber-500 mb-2"></i>
-          <p class="font-semibold text-teal-800">Sterilization</p>
-          <p class="text-xs text-gray-500">hospital grade</p>
-        </div>
+  <!-- BEFORE & AFTER section (using before1.jpg / after1.jpg) -->
+  <section style="padding-top: 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Real results</h2>
+    <div class="ba-container">
+      <div class="ba-card" data-aos="flip-right">
+        <img src="images/before1.jpg" alt="before treatment" class="ba-img" onerror="this.src='https://via.placeholder.com/400x250?text=Before'">
+        <div class="ba-label">Before</div>
+        <div class="ba-sub">consultation</div>
+      </div>
+      <div class="ba-card" data-aos="flip-left" data-aos-delay="200">
+        <img src="images/after1.jpg" alt="after treatment" class="ba-img" onerror="this.src='https://via.placeholder.com/400x250?text=After'">
+        <div class="ba-label">After</div>
+        <div class="ba-sub">amazing smile</div>
       </div>
     </div>
-    <div class="relative">
-      <div class="absolute -top-4 -left-4 w-24 h-24 border-4 border-amber-200 rounded-full"></div>
-      <!-- replaced with local doctor image (lead dentist) -->
-      <img src="images/doctor.jpg" alt="Dr. Ahmed Ali" class="rounded-3xl shadow-2xl relative z-10 object-cover h-96 w-full">
-      <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-teal-100 rounded-full -z-0"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Our Expert Dentist Section (New) -->
-<section id="dentist" class="py-20 bg-teal-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-4xl font-playfair font-bold text-center text-teal-800 mb-4">Our Expert Dentists</h2>
-    <p class="text-center text-gray-600 mb-12">Meet the specialists behind your smile</p>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Doctor 1 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up">
-        <img src="images/doctor.jpg" class="w-full h-64 object-cover rounded-2xl mb-4" alt="Dr. Ahmed Ali">
-        <h3 class="text-xl font-bold text-teal-800">Dr. Ahmed Ali</h3>
-        <p class="text-amber-600 font-medium">Cosmetic Dentistry</p>
-        <p class="text-gray-500 text-sm mt-2">15+ years of experience in aesthetic and restorative dentistry.</p>
-      </div>
-      <!-- Doctor 2 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="100">
-        <img src="images/doctor2.jpg" class="w-full h-64 object-cover rounded-2xl mb-4" alt="Dr. Sarah Khan">
-        <h3 class="text-xl font-bold text-teal-800">Dr. Sarah Khan</h3>
-        <p class="text-amber-600 font-medium">Orthodontics Specialist</p>
-        <p class="text-gray-500 text-sm mt-2">Expert in clear aligners and early intervention orthodontics.</p>
-      </div>
-      <!-- Doctor 3 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="200">
-        <img src="images/doctor3.jpg" class="w-full h-64 object-cover rounded-2xl mb-4" alt="Dr. Arjun Mehta">
-        <h3 class="text-xl font-bold text-teal-800">Dr. Arjun Mehta</h3>
-        <p class="text-amber-600 font-medium">Implant Dentistry Expert</p>
-        <p class="text-gray-500 text-sm mt-2">Specializes in full-mouth rehabilitation and zygomatic implants.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- SCHEDULE APPOINTMENT ONLINE -->
+  <section id="appointment" class="appointment-cta">
+    <h2 data-aos="zoom-in">Schedule Your Appointment Online</h2>
+    <p data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-clock"></i>  Online booking · 24/7 available</p>
+    <button class="cta-btn" data-aos="bounce-in" data-aos-delay="200"><i class="fas fa-calendar-plus"></i>  Book online</button>
+  </section>
 
-<!-- Services Section (6 cards) -->
-<section id="services" class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-4xl font-playfair font-bold text-center text-teal-800 mb-4">Premium Services</h2>
-    <p class="text-center text-gray-600 mb-12">Tailored treatments with a gentle touch</p>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- card 1 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up">
-        <img src="images/service1.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="teeth cleaning">
-        <h3 class="text-xl font-bold text-teal-800">Teeth Cleaning</h3>
-        <p class="text-gray-500 text-sm mt-2">Gentle ultrasonic scaling & polish for a fresh, bright smile.</p>
-      </div>
-      <!-- card 2 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="100">
-        <img src="images/service2.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="dental implants">
-        <h3 class="text-xl font-bold text-teal-800">Dental Implants</h3>
-        <p class="text-gray-500 text-sm mt-2">Permanent, natural‑looking replacements with advanced materials.</p>
-      </div>
-      <!-- card 3 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="200">
-        <img src="images/service3.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="whitening">
-        <h3 class="text-xl font-bold text-teal-800">Whitening</h3>
-        <p class="text-gray-500 text-sm mt-2">Professional laser whitening – up to 8 shades brighter.</p>
-      </div>
-      <!-- card 4 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="300">
-        <img src="images/service1.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="root canal">
-        <h3 class="text-xl font-bold text-teal-800">Root Canal</h3>
-        <p class="text-gray-500 text-sm mt-2">Pain‑free microscopic endodontics to save your tooth.</p>
-      </div>
-      <!-- card 5 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="400">
-        <img src="images/service2.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="smile makeover">
-        <h3 class="text-xl font-bold text-teal-800">Smile Makeover</h3>
-        <p class="text-gray-500 text-sm mt-2">Veneers, bonding & contouring for your dream smile.</p>
-      </div>
-      <!-- card 6 -->
-      <div class="bg-white/70 glass-card rounded-3xl p-6 hover-gold transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="500">
-        <img src="images/service3.jpg" class="w-full h-48 object-cover rounded-2xl mb-4" alt="extraction">
-        <h3 class="text-xl font-bold text-teal-800">Tooth Extraction</h3>
-        <p class="text-gray-500 text-sm mt-2">Gentle, minimally invasive removal with aftercare support.</p>
-      </div>
+  <!-- FOOTER with domain -->
+  <footer>
+    <div class="footer-domain" data-aos="fade-down">www.yourclinicname.com</div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
     </div>
-  </div>
-</section>
+    <p style="margin-top: 2rem; opacity: 0.7;">© 2025 SmileCare Dental · healthy teeth is wealth</p>
+  </footer>
 
-<!-- Pricing Section (display only) -->
-<section class="py-16 bg-teal-50">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-playfair font-bold text-teal-800 mb-8">Investment in your smile</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="border border-amber-200 rounded-3xl p-8 bg-teal-50/30" data-aos="fade-right">
-        <p class="text-lg font-semibold text-teal-700">Standard</p>
-        <p class="text-3xl font-bold text-amber-600">₹15k–20k</p>
-        <p class="text-sm text-gray-500 mt-2">Consultation + basic care</p>
-      </div>
-      <div class="border border-amber-300 rounded-3xl p-8 bg-teal-50 shadow-lg scale-105" data-aos="fade-up">
-        <p class="text-lg font-semibold text-teal-700">Medium</p>
-        <p class="text-3xl font-bold text-amber-600">₹21k–26k</p>
-        <p class="text-sm text-gray-500 mt-2">Restorative + cosmetic</p>
-      </div>
-      <div class="border border-amber-200 rounded-3xl p-8 bg-teal-50/30" data-aos="fade-left">
-        <p class="text-lg font-semibold text-teal-700">Premium</p>
-        <p class="text-3xl font-bold text-amber-600">₹27k–33k</p>
-        <p class="text-sm text-gray-500 mt-2">Full smile makeover</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- AOS initialization & custom scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      offset: 120
+    });
 
-<!-- Gallery Section with lightbox -->
-<section class="py-20 px-4 max-w-7xl mx-auto">
-  <h2 class="text-4xl font-playfair font-bold text-teal-800 text-center mb-12">Moments of excellence</h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <img src="images/before1.jpg" class="gallery-img w-full h-64 object-cover rounded-2xl cursor-pointer hover:opacity-80 transition" onclick="openLightbox(this.src)" alt="gallery before" data-aos="zoom-in">
-    <img src="images/after1.jpg" class="gallery-img w-full h-64 object-cover rounded-2xl cursor-pointer hover:opacity-80 transition" onclick="openLightbox(this.src)" alt="gallery after" data-aos="zoom-in" data-aos-delay="100">
-    <img src="images/service1.jpg" class="gallery-img w-full h-64 object-cover rounded-2xl cursor-pointer hover:opacity-80 transition" onclick="openLightbox(this.src)" alt="gallery 3" data-aos="zoom-in" data-aos-delay="200">
-    <img src="images/service2.jpg" class="gallery-img w-full h-64 object-cover rounded-2xl cursor-pointer hover:opacity-80 transition" onclick="openLightbox(this.src)" alt="gallery 4" data-aos="zoom-in" data-aos-delay="300">
-  </div>
-</section>
+    // Mobile menu toggle
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+    menuIcon.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
 
-<!-- Reviews Section -->
-<section class="py-20 bg-teal-50">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-playfair font-bold text-teal-800 text-center mb-4">Patient stories</h2>
-    <p class="text-center text-gray-600 mb-12">Real experiences from our lovely patients</p>
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- review 1 -->
-      <div class="bg-white p-6 rounded-3xl shadow-md" data-aos="fade-up">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-16 h-16 rounded-full object-cover border-2 border-amber-300">
-          <div>
-            <p class="font-semibold">Sophia Williams</p>
-            <div class="text-amber-400">★★★★★</div>
-          </div>
-        </div>
-        <p class="text-gray-600">“Absolutely painless root canal. The team made me feel calm, and the clinic is spotless. Highly recommend!”</p>
-      </div>
-      <!-- review 2 -->
-      <div class="bg-white p-6 rounded-3xl shadow-md" data-aos="fade-up" data-aos-delay="100">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-16 h-16 rounded-full object-cover border-2 border-amber-300">
-          <div>
-            <p class="font-semibold">James Anderson</p>
-            <div class="text-amber-400">★★★★★</div>
-          </div>
-        </div>
-        <p class="text-gray-600">“Whitening treatment gave me back my confidence. Fast, professional and luxurious ambiance.”</p>
-      </div>
-      <!-- review 3 -->
-      <div class="bg-white p-6 rounded-3xl shadow-md" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-16 h-16 rounded-full object-cover border-2 border-amber-300">
-          <div>
-            <p class="font-semibold">Emily Davis</p>
-            <div class="text-amber-400">★★★★☆</div>
-          </div>
-        </div>
-        <p class="text-gray-600">“Loved the gentle cleaning and the doctor's advice. Only small wait, but worth it.”</p>
-      </div>
-      <!-- review 4 -->
-      <div class="bg-white p-6 rounded-3xl shadow-md" data-aos="fade-up" data-aos-delay="300">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/men/75.jpg" class="w-16 h-16 rounded-full object-cover border-2 border-amber-300">
-          <div>
-            <p class="font-semibold">Michael Brown</p>
-            <div class="text-amber-400">★★★★★</div>
-          </div>
-        </div>
-        <p class="text-gray-600">“Dental implant felt like magic. No pain during procedure, and the result is perfect.”</p>
-      </div>
-      <!-- review 5 -->
-      <div class="bg-white p-6 rounded-3xl shadow-md" data-aos="fade-up" data-aos-delay="400">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/women/17.jpg" class="w-16 h-16 rounded-full object-cover border-2 border-amber-300">
-          <div>
-            <p class="font-semibold">Sarah Johnson</p>
-            <div class="text-amber-400">★★★★☆</div>
-          </div>
-        </div>
-        <p class="text-gray-600">“Friendly staff and modern technology. My smile makeover looks so natural!”</p>
-      </div>
-    </div>
-  </div>
-</section>
+    // Smooth scroll for CTA button (appointment)
+    document.querySelector('.cta-btn').addEventListener('click', () => {
+      document.getElementById('appointment').scrollIntoView({ behavior: 'smooth' });
+    });
 
-<!-- Appointment Form with FormSubmit -->
-<section id="appointment" class="py-20 px-4 max-w-4xl mx-auto">
-  <h2 class="text-4xl font-playfair font-bold text-teal-800 text-center mb-4">Book your visit</h2>
-  <p class="text-center text-gray-600 mb-10">We'll confirm within 2 hours</p>
-  <form action="https://formsubmit.co/luxesmileclinic@gmail.com" method="POST" class="glass-card p-8 rounded-3xl border border-amber-200">
-    <!-- formsubmit hidden config -->
-    <input type="hidden" name="_subject" value="New appointment from LuxeSmile website">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="box">
-    <input type="hidden" name="_next" value="https://luxesmilepreview.netlify.app/#success">
-    <!-- fields -->
-    <div class="grid md:grid-cols-2 gap-6">
-      <div>
-        <label class="block text-teal-700 mb-2 font-medium">Full name</label>
-        <input type="text" name="Name" required class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-300 outline-none">
-      </div>
-      <div>
-        <label class="block text-teal-700 mb-2 font-medium">Phone</label>
-        <input type="tel" name="Phone" required class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-300 outline-none">
-      </div>
-      <div>
-        <label class="block text-teal-700 mb-2 font-medium">Email</label>
-        <input type="email" name="Email" required class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-300 outline-none">
-      </div>
-      <div>
-        <label class="block text-teal-700 mb-2 font-medium">Preferred date</label>
-        <input type="date" name="Date" required class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-300 outline-none">
-      </div>
-    </div>
-    <div class="mt-6">
-      <label class="block text-teal-700 mb-2 font-medium">Message / notes</label>
-      <textarea name="Message" rows="4" class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-300 outline-none"></textarea>
-    </div>
-    <button type="submit" class="mt-8 bg-teal-700 text-white px-10 py-
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('.nav-links a, .hero-btn').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          const target = document.querySelector(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Fallback for images if they fail to load (service icons already handled inline)
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('error', function() {
+        // If it's a service card, we already have inline onerror to show icon
+        if (this.closest('.service-card')) {
+          // Already handled by inline onerror
+          return;
+        }
+        // For dentist or before/after, replace with placeholder
+        if (this.closest('.dentist-card')) {
+          this.src = 'https://via.placeholder.com/200x200?text=Doctor';
+        } else if (this.closest('.ba-card')) {
+          this.src = 'https://via.placeholder.com/400x250?text=Result';
+        }
+      });
+    });
+  </script>
+  <!-- extra style for icon fallback -->
+  <style>
+    .service-img[style*="display: none"] + .service-icon {
+      display: block !important;
+      font-size: 4rem;
+      margin: 1.5rem 0;
+    }
+  </style>
+</body>
+</html>
