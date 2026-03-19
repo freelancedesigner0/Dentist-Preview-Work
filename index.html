@@ -659,4 +659,104 @@
         <div class="ba-sub">consultation</div>
       </div>
       <div class="ba-card" data-aos="flip-left" data-aos-delay="200">
-        <img src="after1.jpg" alt="after treatment" class="ba-im
+        <img src="after1.jpg" alt="after treatment" class="ba-img" onerror="this.src='https://via.placeholder.com/400x250?text=After'">
+        <div class="ba-label">After</div>
+        <div class="ba-sub">amazing smile</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE APPOINTMENT (NEW FORM) -->
+  <section id="appointment" class="appointment-form">
+    <div class="form-container" data-aos="zoom-in">
+      <h2>Schedule Your Appointment Online</h2>
+      <form action="https://formspree.io/f/yourID" method="POST">
+        <div class="input-group">
+          <input type="text" name="name" placeholder="Full Name" required>
+        </div>
+        <div class="input-group">
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+        </div>
+        <div class="input-group">
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+          <input type="date" name="date" required>
+        </div>
+        <div class="input-group">
+          <textarea name="message" placeholder="Your Message (optional)"></textarea>
+        </div>
+        <button type="submit" class="form-btn"><i class="fas fa-calendar-plus"></i>  Book Now</button>
+      </form>
+      <p style="text-align:center; margin-top:1rem; font-size:0.9rem; opacity:0.8;">*We'll confirm your appointment via SMS/email</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-domain" data-aos="fade-down">www.yourclinicname.com</div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="copyright">© 2026 SmileCare Dental · healthy teeth is wealth</p>
+  </footer>
+
+  <!-- AOS & scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      offset: 120
+    });
+
+    // Mobile menu toggle
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+    menuIcon.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('.nav-links a, .hero-btn').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          const target = document.querySelector(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Fallback for images
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('error', function() {
+        if (this.closest('.service-card')) return; // inline handles
+        if (this.closest('.dentist-card')) {
+          this.src = 'https://via.placeholder.com/200x200?text=Doctor';
+        } else if (this.closest('.ba-card')) {
+          this.src = 'https://via.placeholder.com/400x250?text=Result';
+        }
+      });
+    });
+  </script>
+  <style>
+    .service-img[style*="display: none"] + .service-icon {
+      display: block !important;
+      font-size: 4rem;
+      margin: 1.5rem 0;
+    }
+    /* email overflow fix */
+    .footer-domain, .copyright {
+      word-break: break-word;
+      max-width: 100%;
+    }
+  </style>
+</body>
+</html>
