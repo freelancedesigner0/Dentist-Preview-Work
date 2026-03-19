@@ -706,45 +706,59 @@
   <!-- AOS & scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: false,
-      mirror: true,
-      offset: 120
-    });
+    (function() {
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: false,
+        mirror: true,
+        offset: 120
+      });
 
-    // Mobile menu toggle
-    const menuIcon = document.querySelector('.menu-icon');
-    const navLinks = document.querySelector('.nav-links');
-    menuIcon.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+      // Mobile menu toggle - safe query
+      const menuIcon = document.querySelector('.menu-icon');
+      const navLinks = document.querySelector('.nav-links');
+      if (menuIcon && navLinks) {
+        menuIcon.addEventListener('click', function() {
+          navLinks.classList.toggle('active');
+        });
+      }
 
-    // Smooth scroll for all anchor links
-    document.querySelectorAll('.nav-links a, .hero-btn').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-          const target = document.querySelector(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+      // Smooth scroll for all anchor links (nav links and hero button)
+      const anchorLinks = document.querySelectorAll('.nav-links a, .hero-btn');
+      anchorLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId && targetId.startsWith('#')) {
+            const target = document.querySelector(targetId);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
           }
-        }
+        });
       });
-    });
 
-    // Fallback for images
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('error', function() {
-        if (this.closest('.service-card')) return; // inline handles
-        if (this.closest('.dentist-card')) {
-          this.src = 'https://via.placeholder.com/200x200?text=Doctor';
-        } else if (this.closest('.ba-card')) {
-          this.src = 'https://via.placeholder.com/400x250?text=Result';
-        }
+      // Form submit: prevent default to show success message? Keep as is (Formspree).
+      // Optional: we can add a success message, but not required.
+
+      // Image error fallbacks (already inline, but also handle generic)
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (this.closest('.service-card')) {
+            // Already handled by inline onerror (display: none + icon)
+            return;
+          }
+          if (this.closest('.dentist-card')) {
+            this.src = 'https://via.placeholder.com/200x200?text=Doctor';
+          } else if (this.closest('.ba-card')) {
+            this.src = 'https://via.placeholder.com/400x250?text=Result';
+          }
+        });
       });
-    });
+
+      // Additional: if any service icon fallback style
+    })();
   </script>
   <style>
     .service-img[style*="display: none"] + .service-icon {
