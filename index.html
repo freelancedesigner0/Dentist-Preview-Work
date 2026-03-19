@@ -424,6 +424,7 @@
       padding: 2.5rem 3rem;
       border-radius: 60px;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
     }
     .form-container h2 {
       font-size: 2.8rem;
@@ -483,6 +484,21 @@
       box-shadow: 0 15px 30px #00000060;
       border-color: white;
     }
+    /* success message */
+    .success-message {
+      background: rgba(46, 204, 113, 0.9);
+      backdrop-filter: blur(5px);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 50px;
+      margin-top: 1rem;
+      font-weight: 600;
+      display: none;
+    }
+    .success-message.show {
+      display: block;
+    }
 
     /* footer */
     footer {
@@ -532,15 +548,25 @@
 
     /* watermark */
     .watermark {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.5);
-      text-align: right;
-      z-index: 9999;
-      pointer-events: none;
-      font-family: Arial, sans-serif;
+      <div class="watermark">
+  --Full Payment And Remove Watermark--<br>
+  @freelance.website<br>
+  Developer by @freelance.website
+</div>
+
+<style>
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: right;
+  z-index: 9999;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+}
+</style>
     }
 
     /* responsive */
@@ -618,7 +644,7 @@
     </div>
   </section>
 
-  <!-- OUR EXPERT DENTIST (updated with three unique doctors) -->
+  <!-- OUR EXPERT DENTIST -->
   <section id="dentist">
     <h2 class="section-title" data-aos="fade-right">Our Expert Dentist</h2>
     <div class="dentist-grid">
@@ -658,13 +684,4 @@
         <i class="fas fa-quote-right"></i>
         <p>"Dr. Ahmed Ali is amazing! He made me feel comfortable throughout the entire process."</p>
         <div class="author">— Anjali S.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BEFORE & AFTER -->
-  <section style="padding-top: 2rem;">
-    <h2 class="section-title" data-aos="fade-up">Real results</h2>
-    <div class="ba-container">
-      <div class="ba-card" data-aos="flip-right">
-        <img src="before1.jpg" alt="before treatment" class="ba-img" onerror="this.src='https://via.pl
+      </
